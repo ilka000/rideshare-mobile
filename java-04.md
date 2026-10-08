@@ -1,30 +1,45 @@
 # RideShare — Java 4 · Neon dhe PostgreSQL
 
-## Çfarë ndërtova
-Shtova lidhjen server-side me Neon përmes `DATABASE_URL`. Lista lexon udhëtimet me `lexoUdhetimet`, ndërsa faqet e detajeve dhe kërkesës përdorin `gjejUdhetimin`. Faqet rifreskojnë të dhënat në çdo kërkesë dhe shfaqin mesazh kur databaza nuk lidhet. `schema.sql` krijon tabelën `udhetimet` dhe tri udhëtimet fiktive.
+## Çfarë përmban projekti
 
-## Provat që bëra
-### Prova 1: Ndryshimi në databazë shfaqet në aplikacion
-Në Neon ndryshova orën e ID 2 nga `08:15` në `08:25`. Pas rifreskimit, lista dhe detajet shfaqën `08:25`. E riktheva në `08:15` dhe e kontrollova sërish.
+- `lib/db.ts` krijon lidhjen private me Neon në server duke lexuar `DATABASE_URL`.
+- `lib/udhetimet.ts` lexon listën dhe një udhëtim sipas ID-së me pyetje SQL parametrike.
+- `app/page.tsx` lexon listën në çdo kërkesë dhe trajton listën bosh dhe gabimin e lidhjes.
+- `app/udhetimi/[id]/page.tsx` lexon detajet nga e njëjta databazë; ID që mungon shfaq faqen 404.
+- `app/udhetimi/[id]/kerkesa/page.tsx` shfaq simulimin e kërkesës dhe nuk ruan rezervim.
+- `schema.sql` krijon tabelën `udhetimet` dhe fut tri udhëtime fiktive pa i dubluar kur ekzekutohet sërish.
 
-### Prova 2: Lista bosh dhe rikthimi
-Shtova përkohësisht `WHERE false` vetëm te pyetja e listës. U shfaq “Nuk ka udhëtime për momentin.” E hoqa kushtin dhe u kthyen tri kartat.
+`DATABASE_URL` duhet të jetë URL-ja PostgreSQL e Neon për degën/databazën ku ekzekutohet `schema.sql`. `.env.local` përjashtohet nga Git me rregullin `.env*` në `.gitignore`; mos e publiko dhe mos e vendos me prefiks `NEXT_PUBLIC_`.
 
-### Prova 3: Lidhja mungon, rikthimi dhe siguria
-Ndryshova përkohësisht emrin e `DATABASE_URL` në `DATABASE_URL_PA_TEST` dhe rinisa serverin. Faqja shfaqi “Nuk u lidhëm me databazën. Provo përsëri.” Riktheva `DATABASE_URL`, rinisa serverin dhe lista me tri udhëtimet u ngarkua. `.env.local` përjashtohet nga Git përmes `.gitignore`.
+## Provat për t'u kryer dhe dokumentuar
 
-Verifikimet lokale: lidhja me Neon dhe krijimi i tabelës funksionuan; u gjetën tri udhëtime. `npm run build` përfundoi me sukses, përfshirë kontrollin e TypeScript-it.
+Këto kontrolle janë pjesë e ushtrimit, por raporti aktual nuk regjistron rezultate të verifikuara. Plotëso datën, rezultatin dhe çdo problem pasi t'i kryesh vetë me databazën tënde:
 
-## Ku gjendet puna
-- Skema: `schema.sql` në rrënjën e repository-t.
-- Lidhja private: `lib/db.ts`.
-- Pyetjet SQL: `lib/udhetimet.ts`.
-- Faqet e ndryshuara: `app/page.tsx`, `app/udhetimi/[id]/page.tsx` dhe `app/udhetimi/[id]/kerkesa/page.tsx`.
-- Repository: https://github.com/ilka000/rideshare-mobile
-- Aplikacioni në Vercel: nuk është konfiguruar nga kjo punë lokale.
+1. **Ndryshimi ruhet në databazë:** në Neon SQL Editor vendos përkohësisht orën e ID 2 në `08:25`; rifresko listën dhe detajet. Riktheje në `08:15` dhe rifresko sërish.
+2. **Lista bosh:** vendos përkohësisht `WHERE false` vetëm te pyetja në `lexoUdhetimet`; konfirmo mesazhin “Nuk ka udhëtime për momentin.” Hiqe kushtin dhe konfirmo tri kartat.
+3. **Lidhja mungon dhe rikthehet:** riemërto përkohësisht `DATABASE_URL` në `.env.local`, rinis serverin dhe konfirmo mesazhin e gabimit. Riktheje emrin, rinis serverin dhe konfirmo listën.
+4. **Pamja mobile:** në Chrome/Edge përdor Inspect dhe gjerësinë 375 px.
+5. **Ndërtimi:** ekzekuto `npm run build` dhe shëno rezultatin.
 
-## Çfarë mbetet për përmirësim
-Lidhja lokale me Neon funksionon. Aplikacioni nuk është lidhur me Vercel në këtë punë, prandaj publikimi online dhe konfigurimi i `DATABASE_URL` në Production mbeten për më vonë. Kërkesa “Në pritje” mbetet simulim; nuk ka rezervim real.
+| Kontrolli | Rezultati / data |
+| --- | --- |
+| Ndryshimi i ID 2 dhe rikthimi | Për t'u plotësuar |
+| Lista bosh dhe rikthimi | Për t'u plotësuar |
+| Lidhja mungon dhe rikthehet | Për t'u plotësuar |
+| Pamja 375 px | Për t'u plotësuar |
+| `npm run build` | Për t'u plotësuar |
 
-## Ndihma nga AI (Artificial Intelligence – inteligjencë artificiale)
-Përdora AI për të përshtatur udhëzimet me strukturën ekzistuese, për të shkruar lidhjen me Neon dhe për të përditësuar raportin. U verifikuan vetë ndërtimi i projektit, leximi i tri udhëtimeve dhe tri provat në aplikacionin lokal.
+## Publikimi dhe dorëzimi
+
+Projekti është në rrënjën e repository-t; aty gjenden `package.json`, `schema.sql` dhe kodi. Para dorëzimit:
+
+1. Krijo/lidh databazën Neon dhe ekzekuto `schema.sql` në të njëjtën degë që përdor `DATABASE_URL`.
+2. Verifiko `DATABASE_URL` në Vercel për Production dhe bëj redeploy pas lidhjes së Neon.
+3. Kontrollo te GitHub Desktop që ndryshimet përfshijnë kodin, `schema.sql`, raportin, `package.json` dhe `package-lock.json`; mos përfshi `.env.local`, `node_modules` ose `.next`.
+4. Përdor mesazhin e commit-it `Java 4 - RideShare me Neon`, shtyji ndryshimet në `main` dhe `origin`, pastaj dorëzo lidhjen kryesore të repository-t me formularin Java 4. Pas kontrollit automatik, plotëso rezultatet e provave të mësipërme.
+
+Lidhja me Vercel/Neon dhe rezultatet e provave nuk mund të konfirmohen nga ky raport. Aplikacioni lexon vetëm udhëtime fiktive; nuk ka formular publik për shkrim, identifikim shoferi apo rezervim real. Supabase nuk kërkohet për këtë dorëzim.
+
+## Përdorimi i AI
+
+AI u përdor për të interpretuar udhëzimet dhe për të përditësuar dokumentimin e punës ekzistuese. Rezultatet e provave duhet të plotësohen nga studenti pasi t'i kryejë.
