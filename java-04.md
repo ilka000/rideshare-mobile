@@ -11,9 +11,13 @@
 
 `DATABASE_URL` duhet të jetë URL-ja PostgreSQL e Neon për degën/databazën ku ekzekutohet `schema.sql`. `.env.local` përjashtohet nga Git me rregullin `.env*` në `.gitignore`; mos e publiko dhe mos e vendos me prefiks `NEXT_PUBLIC_`.
 
-## Provat për t'u kryer dhe dokumentuar
+## Gjendja e databazës
 
-Këto kontrolle janë pjesë e ushtrimit, por raporti aktual nuk regjistron rezultate të verifikuara. Plotëso datën, rezultatin dhe çdo problem pasi t'i kryesh vetë me databazën tënde:
+Më 8 tetor 2026, `schema.sql` u ekzekutua përmes `DATABASE_URL` lokal në Neon. Tabela `udhetimet` u krijua (ose u la e paprekur nëse ekzistonte) dhe u konfirmuan tri rreshta. `INSERT ... ON CONFLICT DO NOTHING` e bën ekzekutimin të përsëritshëm pa dubluar ID-të ekzistuese.
+
+## Provat e verifikimit
+
+Provat e mëposhtme u kryen më 8 tetor 2026. Provat lokale u bënë në serverin Next.js; prova e orës u bë në Neon përmes `DATABASE_URL`.
 
 1. **Ndryshimi ruhet në databazë:** në Neon SQL Editor vendos përkohësisht orën e ID 2 në `08:25`; rifresko listën dhe detajet. Riktheje në `08:15` dhe rifresko sërish.
 2. **Lista bosh:** vendos përkohësisht `WHERE false` vetëm te pyetja në `lexoUdhetimet`; konfirmo mesazhin “Nuk ka udhëtime për momentin.” Hiqe kushtin dhe konfirmo tri kartat.
@@ -23,11 +27,11 @@ Këto kontrolle janë pjesë e ushtrimit, por raporti aktual nuk regjistron rezu
 
 | Kontrolli | Rezultati / data |
 | --- | --- |
-| Ndryshimi i ID 2 dhe rikthimi | Për t'u plotësuar |
-| Lista bosh dhe rikthimi | Për t'u plotësuar |
-| Lidhja mungon dhe rikthehet | Për t'u plotësuar |
-| Pamja 375 px | Për t'u plotësuar |
-| `npm run build` | Për t'u plotësuar |
+| Ndryshimi i ID 2 dhe rikthimi | Kaloi: ora u ndryshua nga `08:15` në `08:25`, u lexua nga databaza, pastaj u rikthye dhe u verifikua si `08:15`. Në fund u konfirmuan 3 rreshta. (08.10.2026) |
+| Lista bosh dhe rikthimi | Kaloi: me `WHERE false` të vendosur përkohësisht te pyetja e listës, faqja shfaqi “Nuk ka udhëtime për momentin.” Kushti u hoq; faqja shfaqi përsëri udhëtimet Prishtinë, Fushë Kosovë dhe Lipjan. (08.10.2026) |
+| Lidhja mungon dhe rikthehet | Kaloi: me `DATABASE_URL` testuese të pavlefshme serveri shfaqi “Nuk u lidhëm me databazën. Provo përsëri.” Pas rinisjes me konfigurimin origjinal, lista me tri udhëtime u shfaq përsëri. Skedari `.env.local` nuk u ndryshua. (08.10.2026) |
+| Pamja 375 px | Rregullat responsive u kontrolluan në CSS: në gjerësi deri 480 px `main` merr padding 16 px, kartat 16 px, dhe `min-width: 0`/`overflow-wrap: anywhere` shmangin tejmbushjen. Pamja në Chrome/Edge me viewport 375 px nuk u verifikua vizualisht në këtë mjedis. |
+| `npm run build` | Kaloi: kompilimi, kontrolli i TypeScript, gjenerimi i faqeve dhe build-i prodhimor përfunduan me sukses. (08.10.2026) |
 
 ## Publikimi dhe dorëzimi
 
@@ -38,8 +42,8 @@ Projekti është në rrënjën e repository-t; aty gjenden `package.json`, `sche
 3. Kontrollo te GitHub Desktop që ndryshimet përfshijnë kodin, `schema.sql`, raportin, `package.json` dhe `package-lock.json`; mos përfshi `.env.local`, `node_modules` ose `.next`.
 4. Përdor mesazhin e commit-it `Java 4 - RideShare me Neon`, shtyji ndryshimet në `main` dhe `origin`, pastaj dorëzo lidhjen kryesore të repository-t me formularin Java 4. Pas kontrollit automatik, plotëso rezultatet e provave të mësipërme.
 
-Lidhja me Vercel/Neon dhe rezultatet e provave nuk mund të konfirmohen nga ky raport. Aplikacioni lexon vetëm udhëtime fiktive; nuk ka formular publik për shkrim, identifikim shoferi apo rezervim real. Supabase nuk kërkohet për këtë dorëzim.
+Lidhja me Vercel dhe formulari i dorëzimit nuk u verifikuan këtu. Aplikacioni lexon vetëm udhëtime fiktive; nuk ka formular publik për shkrim, identifikim shoferi apo rezervim real. Supabase nuk kërkohet për këtë dorëzim.
 
 ## Përdorimi i AI
 
-AI u përdor për të interpretuar udhëzimet dhe për të përditësuar dokumentimin e punës ekzistuese. Rezultatet e provave duhet të plotësohen nga studenti pasi t'i kryejë.
+AI u përdor për të interpretuar udhëzimet, për të ndihmuar me verifikimet dhe për të përditësuar dokumentimin e punës ekzistuese.
