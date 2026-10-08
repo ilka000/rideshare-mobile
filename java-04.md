@@ -19,9 +19,19 @@ Më 8 tetor 2026, `schema.sql` u ekzekutua përmes `DATABASE_URL` lokal në Neon
 
 Provat e mëposhtme u kryen më 8 tetor 2026. Provat lokale u bënë në serverin Next.js; prova e orës u bë në Neon përmes `DATABASE_URL`.
 
-1. **Ndryshimi ruhet në databazë:** ID 2 u vendos përkohësisht në `08:25`, u lexua nga Neon, pastaj u rikthye në `08:15` dhe u verifikua.
-2. **Lista bosh:** `WHERE false` u vendos përkohësisht vetëm te pyetja `lexoUdhetimet`; faqja tregoi mesazhin e listës bosh. Kushti u hoq dhe tri kartat u panë sërish.
-3. **Lidhja mungon dhe rikthehet:** serveri u nis me URL testuese të pavlefshme, faqja tregoi mesazhin e gabimit, pastaj serveri u rinis me konfigurimin origjinal dhe lista u shfaq përsëri. `.env.local` nuk u ndryshua.
+### Prova 1 — Ndryshimi ruhet në databazë
+
+Hapat: ndryshova orën e ID 2 në Neon nga `08:15` në `08:25` dhe e lexova sërish nga databaza; pastaj e ktheva në `08:15` dhe verifikova vlerën. Rezultati: prova kaloi, ora origjinale u rikthye dhe databaza përfundoi me tri udhëtime.
+
+### Prova 2 — Lista bosh dhe rikthimi
+
+Hapat: vendosa përkohësisht `WHERE false` vetëm te pyetja e `lexoUdhetimet`, hapa faqen, pastaj e hoqa kushtin dhe hapa faqen sërish. Rezultati: prova kaloi; fillimisht u shfaq “Nuk ka udhëtime për momentin.” dhe pas rikthimit u shfaqën udhëtimet Prishtinë, Fushë Kosovë dhe Lipjan.
+
+### Prova 3 — Lidhja mungon dhe rikthehet
+
+Hapat: nisa serverin me një `DATABASE_URL` testuese të pavlefshme, hapa faqen, pastaj e rinisa me konfigurimin origjinal. Rezultati: prova kaloi; faqja shfaqi mesazhin e gabimit të databazës dhe pas rikthimit u shfaqën tri udhëtimet; `.env.local` nuk u ndryshua.
+
+Provat e tjera: rregullat CSS për ekran të vogël u kontrolluan, por pamja vizuale në Chrome/Edge me gjerësi 375 px mbetet për t'u bërë. `npm run build` përfundoi me sukses.
 4. **Pamja mobile:** rregullat CSS për ekran të vogël u kontrolluan. Kontrolli vizual në Chrome/Edge në 375 px mbetet për t'u bërë.
 5. **Ndërtimi:** `npm run build` përfundoi me sukses.
 
