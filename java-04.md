@@ -19,11 +19,11 @@ Më 8 tetor 2026, `schema.sql` u ekzekutua përmes `DATABASE_URL` lokal në Neon
 
 Provat e mëposhtme u kryen më 8 tetor 2026. Provat lokale u bënë në serverin Next.js; prova e orës u bë në Neon përmes `DATABASE_URL`.
 
-1. **Ndryshimi ruhet në databazë:** në Neon SQL Editor vendos përkohësisht orën e ID 2 në `08:25`; rifresko listën dhe detajet. Riktheje në `08:15` dhe rifresko sërish.
-2. **Lista bosh:** vendos përkohësisht `WHERE false` vetëm te pyetja në `lexoUdhetimet`; konfirmo mesazhin “Nuk ka udhëtime për momentin.” Hiqe kushtin dhe konfirmo tri kartat.
-3. **Lidhja mungon dhe rikthehet:** riemërto përkohësisht `DATABASE_URL` në `.env.local`, rinis serverin dhe konfirmo mesazhin e gabimit. Riktheje emrin, rinis serverin dhe konfirmo listën.
-4. **Pamja mobile:** në Chrome/Edge përdor Inspect dhe gjerësinë 375 px.
-5. **Ndërtimi:** ekzekuto `npm run build` dhe shëno rezultatin.
+1. **Ndryshimi ruhet në databazë:** ID 2 u vendos përkohësisht në `08:25`, u lexua nga Neon, pastaj u rikthye në `08:15` dhe u verifikua.
+2. **Lista bosh:** `WHERE false` u vendos përkohësisht vetëm te pyetja `lexoUdhetimet`; faqja tregoi mesazhin e listës bosh. Kushti u hoq dhe tri kartat u panë sërish.
+3. **Lidhja mungon dhe rikthehet:** serveri u nis me URL testuese të pavlefshme, faqja tregoi mesazhin e gabimit, pastaj serveri u rinis me konfigurimin origjinal dhe lista u shfaq përsëri. `.env.local` nuk u ndryshua.
+4. **Pamja mobile:** rregullat CSS për ekran të vogël u kontrolluan. Kontrolli vizual në Chrome/Edge në 375 px mbetet për t'u bërë.
+5. **Ndërtimi:** `npm run build` përfundoi me sukses.
 
 | Kontrolli | Rezultati / data |
 | --- | --- |
@@ -40,7 +40,7 @@ Projekti është në rrënjën e repository-t; aty gjenden `package.json`, `sche
 1. Krijo/lidh databazën Neon dhe ekzekuto `schema.sql` në të njëjtën degë që përdor `DATABASE_URL`.
 2. Verifiko `DATABASE_URL` në Vercel për Production dhe bëj redeploy pas lidhjes së Neon.
 3. Kontrollo te GitHub Desktop që ndryshimet përfshijnë kodin, `schema.sql`, raportin, `package.json` dhe `package-lock.json`; mos përfshi `.env.local`, `node_modules` ose `.next`.
-4. Përdor mesazhin e commit-it `Java 4 - RideShare me Neon`, shtyji ndryshimet në `main` dhe `origin`, pastaj dorëzo lidhjen kryesore të repository-t me formularin Java 4. Pas kontrollit automatik, plotëso rezultatet e provave të mësipërme.
+4. Ndryshimet Java 4 janë shtyrë në `main` dhe `origin`. Dorëzo lidhjen kryesore të repository-t me formularin Java 4.
 
 Lidhja me Vercel dhe formulari i dorëzimit nuk u verifikuan këtu. Aplikacioni lexon vetëm udhëtime fiktive; nuk ka formular publik për shkrim, identifikim shoferi apo rezervim real. Supabase nuk kërkohet për këtë dorëzim.
 
