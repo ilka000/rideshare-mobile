@@ -4,7 +4,7 @@ Plotësoje pas provave reale. Mos vendos sekrete ose vlera nga `.env.local` kët
 
 ## Prova 1 · Sesioni
 
-Hyrja me GitHub funksionoi dhe paneli shfaqi profilin. Rifreskimi dhe dalja nuk u provuan.
+Hyrja me GitHub funksionoi dhe paneli shfaqi profilin me rolin shofer. Rifreskimi dhe dalja nuk u provuan.
 
 ## Prova 2 · Ndryshimi i lejuar (udhëtimi ID 2)
 
