@@ -12,8 +12,8 @@ Paneli shfaqi sukses pas ruajtjes. Neon, lista dhe detajet e ID 2 treguan 08:25;
 
 ## Prova 3 · Ndryshimi i refuzuar (udhëtimi ID 1)
 
-Në Neon, i njëjti kusht pronësie nuk lejoi ID 1 (0 rreshta të ndryshuar); ora mbeti 08:00. Ndryshimi i formularit në DevTools nuk u provua.
+Server Action u thirr me ID 1 nën sesion test lokal të shoferit dhe u ridrejtua me mesazhin “Nuk ke leje”. Ora mbeti 08:00. Ndryshimi manual i fushës në DevTools nuk u bë.
 
 ## Vështirësi ose gabime
 
-Provat e rifreskimit/daljes dhe DevTools kërkojnë veprim në shfletues; verifikimet e lejuara/refuzuara u kryen drejtpërdrejt në Neon.
+Rifreskimi/dalja dhe ndryshimi manual në DevTools nuk u provuan. Server Action për ID 1 u verifikua me sesion test lokal; ruajtja e ID 2 u provua në panel.
