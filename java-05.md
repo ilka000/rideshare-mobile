@@ -8,7 +8,7 @@ Hyrja me GitHub funksionoi dhe paneli shfaqi profilin me rolin shofer. Rifreskim
 
 ## Prova 2 · Ndryshimi i lejuar (udhëtimi ID 2)
 
-Në Neon, kushti i pronarit lejoi ID 2: ora u bë 08:25 dhe u rikthye në 08:15. Lista dhe detajet në shfletues nuk u verifikuan.
+Paneli shfaqi sukses pas ruajtjes. Neon, lista dhe detajet e ID 2 treguan 08:25; ora u rikthye në 08:15.
 
 ## Prova 3 · Ndryshimi i refuzuar (udhëtimi ID 1)
 
