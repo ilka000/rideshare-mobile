@@ -4,15 +4,21 @@ Plotësoje pas provave reale. Mos vendos sekrete ose vlera nga `.env.local` kët
 
 ## Prova 1 · Sesioni
 
-Hapa `/panel`, klikova **Hyr me GitHub** dhe autorizova llogarinë; paneli shfaqi profilin me rolin **shofer**. Pastaj kontrollova sesionin lokal dy herë radhazi dhe ai mbeti aktiv; kërkesa e daljes pastroi cookie-n e sesionit. Dalja nuk u klikua në shfletues.
+**Hapat:** Hapa `/panel`, klikova **Hyr me GitHub** dhe autorizova llogarinë. Për rifreskimin dhe daljen, kontrollova dy herë endpoint-in e sesionit dhe pastaj dërgova kërkesën lokale të daljes.
+
+**Rezultati:** Hyrja reale shfaqi profilin me rolin **shofer**. Sesioni testues mbeti aktiv pas rifreskimit dhe kërkesa e daljes pastroi cookie-n e sesionit; dalja nuk u klikua në shfletues.
 
 ## Prova 2 · Ndryshimi i lejuar (udhëtimi ID 2)
 
-Në panel vendosa `08:25` te fusha e orës dhe klikova **Ruaj orën**; paneli shfaqi sukses. Kontrollova Neon, listën dhe detajet e ID 2, ku ora ishte `08:25`, pastaj e riktheva në `08:15`.
+**Hapat:** Në panel vendosa `08:25` te fusha e orës dhe klikova **Ruaj orën**. Kontrollova orën në Neon, në listën e udhëtimeve dhe te detajet e ID 2; pastaj e riktheva në `08:15`.
+
+**Rezultati:** Paneli shfaqi sukses; Neon, lista dhe detajet treguan `08:25`. Pas rikthimit, ID 2 ishte përsëri `08:15`.
 
 ## Prova 3 · Ndryshimi i refuzuar (udhëtimi ID 1)
 
-Me një sesion prove lokal të shoferit, dërgova formularin te Server Action me `id=1` në vend të `id=2`; serveri e refuzoi kërkesën dhe shfaqi “Nuk ke leje”. Kontrolli në Neon konfirmoi se ora e ID 1 mbeti `08:00`; ndryshimi manual në DevTools nuk u krye.
+**Hapat:** Me sesion prove lokal të shoferit, dërgova formularin te Server Action me `id=1` në vend të `id=2` dhe kontrollova rreshtin e ID 1 në Neon.
+
+**Rezultati:** Serveri e refuzoi kërkesën me mesazhin “Nuk ke leje”; ora e ID 1 mbeti `08:00`. Fusha nuk u ndryshua manualisht në DevTools.
 
 ## Vështirësi ose gabime
 
