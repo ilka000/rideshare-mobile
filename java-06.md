@@ -1,23 +1,25 @@
-# Java 6 · PWA dhe lista publike offline
+# RideShare — Java 6 · PWA dhe puna offline
 
-## Prova 1 · Manifesti dhe vizita online
+## Çfarë ndërtova
 
-**Hapat:** Me serverin lokal dhe internet, hapa `/manifest.webmanifest`, pastaj faqen kryesore dhe `/offline.html`. Kontrollova ikonat PNG dhe lexova përgjigjen e listës në lexues.
+Shtova manifestin me emrin RideShare AAB dhe ikonat e aplikacionit. Service worker-i ruan faqen offline dhe vetëm listën publike të udhëtimeve; lexuesi shfaq kartat, burimin dhe kohën e ruajtjes, pa dërguar ose konfirmuar rezervim.
 
-**Rezultati real:** Manifesti shfaqi emrin `RideShare AAB` dhe adresat e dy ikonave; skedarët janë 192×192 dhe 512×512. Faqja kryesore tregoi tri udhëtimet. `/offline.html` shfaqi tri karta, burimin server dhe kohën e ruajtjes; kërkesa e lexuesit u ndërmjetësua nga service worker-i.
+## Provat që bëra
 
-## Prova 2 · Pa internet, pas rifreskimit
+### Prova 1: Manifesti dhe vizita online
 
-**Hapat:** Pasi u ruajt lista me internet, ndala përkohësisht serverin lokal, hapa `/` dhe rifreskova faqen.
+**Hapat e provës:** Me serverin lokal dhe lidhje interneti hapa `/manifest.webmanifest`, faqen kryesore dhe `/offline.html`. Kontrollova dy skedarët PNG dhe rifreskova listën në lexues.
 
-**Rezultati real:** `/` u hap nga dokumenti offline. U shfaqën tri karta me oraret e ruajtura, koha e kopjes dhe mesazhi se lista mund të jetë vjetruar. Butoni **Kërko vend** ishte i çaktivizuar. Serveri u ndez sërish për provën 3.
+**Rezultati real:** Manifesti tregoi emrin `RideShare AAB` dhe adresat e ikonave `icon-192.png` e `icon-512.png`; skedarët janë përkatësisht 192×192 dhe 512×512. Faqja kryesore dhe lexuesi shfaqën tri udhëtimet. Lexuesi tregoi burimin server dhe kohën e ruajtjes; lista u ruajt nga service worker-i. E provova në Safari pa instaluar aplikacionin.
 
-## Prova 3 · Rikthimi i lidhjes dhe të dhënat e reja
+### Prova 2: Pa internet, edhe pas rifreskimit
 
-**Hapat:** Ndryshova përkohësisht në Neon orën e ID 2 nga `08:15` në `08:25`, pastaj shtypa **Rifresko listën** me serverin online. Pas verifikimit, e riktheva në `08:15` dhe rifreskova përsëri.
+**Hapat e provës:** Pasi u ruajt lista me internet, ndala përkohësisht serverin lokal, hapa `/` dhe rifreskova faqen.
 
-**Rezultati real:** Lexuesi mori përgjigje të re nga serveri, tregoi ID 2 me orën `08:25` dhe shënoi kohë të re ruajtjeje. Më pas, ID 2 u rikthye në `08:15`; rifreskimi i fundit në shfletues e shfaqi `08:15`. Verifikimi përfundimtar në Neon konfirmoi `08:15`.
+**Rezultati real:** `/` u hap nga dokumenti offline dhe shfaqi tri kartat me oraret e ruajtura. U shfaqën koha e kopjes dhe mesazhi se lista mund të jetë vjetruar; butoni **Kërko vend** ishte i çaktivizuar. Serveri u ndez përsëri për provën 3.
 
-## Shënim
+### Prova 3: Rikthe lidhjen dhe kërko të dhënat e reja
 
-Provat u kryen lokalisht në shfletues me databazën Neon të projektit. Ndryshimi i përkohshëm u rikthye dhe ID 2 mbaroi në `08:15`.
+**Hapat e provës:** Në Neon ndryshova përkohësisht orën e ID 2 nga `08:15` në `08:25`, pastaj me serverin online shtypa **Rifresko listën**. Pas kontrollit, e riktheva ID 2 në `08:15` dhe rifreskova përsëri.
+
+**Rezultati real:** Lexuesi mori listën nga serveri dhe shfaqi ID 2 me orën e re `08:25` dhe kohë të re ruajtjeje. Pas rikthimit, Neon konfirmoi `08:15` dhe rifreskimi i fundit në shfletues shfaqi përsëri `08:15`.
