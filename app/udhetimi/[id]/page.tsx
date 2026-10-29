@@ -21,6 +21,7 @@ export default async function Detajet({
     );
   }
   if (!udhetim) notFound();
+  const etiketaVendeve = udhetim.vende === 1 ? "vend i lirë" : "vende të lira";
 
   return (
     <main>
@@ -28,7 +29,7 @@ export default async function Detajet({
       <h1>{udhetim.nisja} – {udhetim.destinacioni}</h1>
       <p>Ora: {udhetim.ora}</p>
       <p>Vendtakimi: {udhetim.vendtakimi}</p>
-      <p>Vende të lira: {udhetim.vende}</p>
+      <p>{udhetim.vende} {etiketaVendeve}</p>
       {udhetim.vende > 0
         ? <Link className="action" href={`/udhetimi/${id}/kerkesa`}>Kërko vend</Link>
         : <button className="action" disabled>Nuk ka vende të lira</button>}
