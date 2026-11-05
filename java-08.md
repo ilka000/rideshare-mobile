@@ -88,15 +88,15 @@ Provat e ndërveprimit u kryen në Safari te `http://localhost:3002/java-08-test
 
 **Parashikimi im para klikimit:** Mendova se pas marrjes së pozicionit do të plotësohej automatikisht fusha ose do të shfaqej një vendtakim i konfirmuar.
 
-**Çfarë pashë realisht:** Për pak kohë u shfaq `Po kërkojmë vendndodhjen…` dhe butoni u çaktivizua. Pastaj u shfaq `Pozicioni u mor. Saktësia rreth 42 m. Shkruaj një emër vendi të dallueshëm.` Fusha mbeti bosh dhe vendtakimi i konfirmuar mbeti `Ende nuk është zgjedhur`.
+**Çfarë pashë realisht:** E përsërita provën pas përputhjes me testin e kursit, në `http://localhost:3004/java-08-test`. Për pak kohë u shfaq `Po kërkojmë vendndodhjen…` dhe butoni u çaktivizua. Pastaj shfaqet `Pozicioni u mor. Shkruaj një emër vendi të dallueshëm.` dhe saktësia `37 m`. Fusha mbeti bosh dhe vendtakimi i konfirmuar mbeti `Ende nuk është zgjedhur`.
 
-**Skedari dhe funksioni që e shpjegojnë:** Te `components/Vendtakimi.tsx`, funksioni `perdorVendndodhjen()` e merr `position.coords.accuracy` dhe e përdor vetëm në mesazh. Callback-u i suksesit nuk i lexon koordinatat për t’i kthyer në emër vendi dhe nuk thërret `setVendtakimi`; emrin duhet ta shkruajë e konfirmojë përdoruesi me `konfirmo()`. Skenari lokal që e shkaktoi është te `app/java-08-test/page.tsx`, te `pozicioniProve()` dhe dega `skenari === "sukses"`.
+**Skedari dhe funksioni që e shpjegojnë:** Te `components/Vendtakimi.tsx`, funksioni `perdorVendndodhjen()` e merr `position.coords.accuracy` dhe e shfaq te `location-accuracy`. Callback-u i suksesit nuk i lexon koordinatat për t’i kthyer në emër vendi dhe nuk thërret `setVendtakimi`; emrin duhet ta shkruajë e konfirmojë përdoruesi me `konfirmo()`. Skenari lokal që e shkaktoi është te `app/java-08-test/page.tsx`, te `pozicioniProve()` dhe dega `skenari === "sukses"`.
 
 **Çfarë kuptova ose korrigjova:** GPS-i këtu ndihmon vetëm me saktësinë e pozicionit; nuk identifikon vetë një vend si bibliotekë apo parking. Pritshmërinë time e korrigjova: duhet të shkruaj një emër të dallueshëm dhe ta konfirmoj manualisht. Kjo përputhet me tekstin udhëzues në mesazhin e aplikacionit.
 
 ## Kontrolli teknik
 
-`npm run build` kaloi dhe përfshiu faqen `/java-08-test`. API-ja publike me Neon u verifikua më herët dhe ktheu tri udhëtime; kjo provë nuk ndryshoi të dhënat në databazë. `package.json` dhe `package-lock.json` nuk kërkuan ndryshime.
+`npm run build` kaloi dhe përfshiu faqen `/java-08-test`. Konfigurimi i testit është `{"version":1,"path":"/java-08-test"}` te `mobile-week08.json`. Faqja përdor të njëjtin komponent si detajet dhe simulimi i suksesit shfaqi `37 m`. API-ja publike me Neon u verifikua më herët dhe ktheu tri udhëtime; kjo provë nuk ndryshoi të dhënat në databazë. `package-lock.json` është në rrënjë.
 
 ## Kufizime të provave
 

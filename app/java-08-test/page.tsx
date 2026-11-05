@@ -12,7 +12,7 @@ function pozicioniProve(): GeolocationPosition {
       latitude: 42.66,
       longitude: 21.16,
       altitude: null,
-      accuracy: 42,
+      accuracy: 37,
       altitudeAccuracy: null,
       heading: null,
       speed: null,
@@ -48,7 +48,7 @@ export default function Java08Test() {
     <main>
       <Link href="/">← Kthehu te lista</Link>
       <h1>Java 8 · Prova lokale e vendtakimit</h1>
-      <p>Kjo faqe përdor të njëjtin komponent si detajet. Të dhënat janë lokale dhe vendtakimi nuk i dërgohet shoferit.</p>
+      <p>Kjo faqe përdor të njëjtin komponent si detajet. Udhëtari fiktiv është Dritoni; të dhënat janë lokale dhe vendtakimi nuk dërgohet te shoferi.</p>
       <label htmlFor="skenari-gjeolokacionit">Skenari i vendndodhjes</label>{" "}
       <select
         id="skenari-gjeolokacionit"
