@@ -82,17 +82,17 @@ Provat e ndërveprimit u kryen në Safari te `http://localhost:3002/java-08-test
 
 **Vëzhgimi:** Fusha u zbraz dhe vendtakimi u kthye në `Ende nuk është zgjedhur`.
 
-### Hyrje e re · Suksesi i GPS-it nuk e konfirmon vetë vendtakimin
+### Hyrje e re · Pozicioni merret, por vendtakimi nuk konfirmohet vetë
 
-**Hyrja që provova:** Në `/java-08-test` zgjodha `Simulim: pozicioni u mor` dhe shtypa **Përdor vendndodhjen time**.
+**Hyrja që provova:** Në `http://localhost:3004/java-08-test` lashë skenarin `Simulim: pozicioni u mor` dhe klikova **Përdor vendndodhjen time**.
 
-**Parashikimi im para klikimit:** Mendova se pas marrjes së pozicionit do të plotësohej automatikisht fusha ose do të shfaqej një vendtakim i konfirmuar.
+**Parashikimi im para klikimit:** Prisja që suksesi i GPS-it ta plotësonte fushën ose ta vendoste automatikisht një vendtakim të konfirmuar.
 
-**Çfarë pashë realisht:** E përsërita provën pas përputhjes me testin e kursit, në `http://localhost:3004/java-08-test`. Për pak kohë u shfaq `Po kërkojmë vendndodhjen…` dhe butoni u çaktivizua. Pastaj shfaqet `Pozicioni u mor. Shkruaj një emër vendi të dallueshëm.` dhe saktësia `37 m`. Fusha mbeti bosh dhe vendtakimi i konfirmuar mbeti `Ende nuk është zgjedhur`.
+**Çfarë pashë realisht:** Menjëherë pas klikimit butoni u çaktivizua dhe u shfaq `Po kërkojmë vendndodhjen…`. Pas rreth 350 ms butoni u aktivizua përsëri; statusi u bë `Pozicioni u mor. Shkruaj një emër vendi të dallueshëm.` dhe u shfaq saktësia `37 m`. Fusha mbeti bosh dhe vendtakimi i konfirmuar mbeti `Ende nuk është zgjedhur`.
 
-**Skedari dhe funksioni që e shpjegojnë:** Te `components/Vendtakimi.tsx`, funksioni `perdorVendndodhjen()` e merr `position.coords.accuracy` dhe e shfaq te `location-accuracy`. Callback-u i suksesit nuk i lexon koordinatat për t’i kthyer në emër vendi dhe nuk thërret `setVendtakimi`; emrin duhet ta shkruajë e konfirmojë përdoruesi me `konfirmo()`. Skenari lokal që e shkaktoi është te `app/java-08-test/page.tsx`, te `pozicioniProve()` dhe dega `skenari === "sukses"`.
+**Skedari dhe funksioni që e shpjegojnë:** `components/Vendtakimi.tsx`, funksioni `perdorVendndodhjen()`, në callback-un e suksesit ruan vetëm saktësinë me `setAccuracy(Math.round(position.coords.accuracy))` dhe kalon gjendjen në `success`. Ai nuk e plotëson fushën dhe nuk thërret `setVendtakimi`. Vendtakimi konfirmohet vetëm nga `konfirmo()` pasi përdoruesi shkruan një emër. Në `app/java-08-test/page.tsx`, funksioni `pozicioniProve()` krijon pozicionin e simuluar me saktësi 37 m dhe dega `skenari === "sukses"` e kthen atë pas 350 ms.
 
-**Çfarë kuptova ose korrigjova:** GPS-i këtu ndihmon vetëm me saktësinë e pozicionit; nuk identifikon vetë një vend si bibliotekë apo parking. Pritshmërinë time e korrigjova: duhet të shkruaj një emër të dallueshëm dhe ta konfirmoj manualisht. Kjo përputhet me tekstin udhëzues në mesazhin e aplikacionit.
+**Çfarë kuptova ose korrigjova:** Korrigjova pritshmërinë time: marrja e koordinatave nuk përcakton emrin e një pike si bibliotekë apo parking. Kjo provë shfaq vetëm saktësinë; emrin e vendtakimit duhet ta shkruaj dhe ta konfirmoj vetë.
 
 ## Kontrolli teknik
 
