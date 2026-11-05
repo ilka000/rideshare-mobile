@@ -8,4 +8,11 @@ h1 { line-height: 1.2; }
 .trip-card { min-width: 0; border: 1px solid #8090aa; border-radius: 12px; padding: 18px; overflow-wrap: anywhere; }
 .action { display: inline-flex; align-items: center; min-height: 44px; margin-top: 12px; padding: 8px 14px; border: 0; border-radius: 8px; background: #3548d4; color: white; font: inherit; text-decoration: none; }
 .action:disabled { background: #39455b; color: #e4eaf4; cursor: not-allowed; }
+.meetup { margin: 24px 0; padding: 18px; border: 1px solid #53627b; border-radius: 12px; background: #111b2d; }
+.meetup h2 { margin-top: 0; }
+.meetup label { display: block; margin: 14px 0 6px; }
+.meetup input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #8090aa; border-radius: 8px; background: #0b1220; color: inherit; font: inherit; }
+.meetup-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.secondary-action { background: #26364f; }
+.local-note { color: #bac6d9; font-size: .92rem; }
 @media (max-width: 480px) { main { padding: 18px 16px; } .trip-card { padding: 16px; } }
