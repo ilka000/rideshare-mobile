@@ -25,3 +25,10 @@ Vercel creates deployments from GitHub pushes once the repository is imported an
 - `/udhetimi/2` — trip details and meeting point
 - `/udhetimi/2/kerkesa` — pending request simulation
 - `/udhetimi/99` — trip not found
+- `/java-08-test` — Java 8 local meeting point and geolocation behavior checks
+
+## Java 8 submission files
+
+- `components/Vendtakimi.tsx` is shared by the trip detail and `/java-08-test`.
+- `mobile-week08.json` lists the eight behavior checks and their stable selectors.
+- `java-08.md` records the local observations and clearly distinguishes simulated geolocation callbacks from real device permission tests.

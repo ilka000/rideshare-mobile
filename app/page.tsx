@@ -23,6 +23,7 @@ export default async function Home() {
     <main>
       <h1>RideShare · Udhëtimet për AAB</h1>
       <p><Link href="/panel">Hyr / Paneli im</Link></p>
+      <p><Link href="/java-08-test">Java 8 · Provat e vendtakimit</Link></p>
       <p>Burimi: Neon · të dhëna fiktive për ushtrime</p>
       {udhetimet.length === 0 ? (
         <p>Nuk ka udhëtime për momentin.</p>

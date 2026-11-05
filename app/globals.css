@@ -12,6 +12,7 @@ h1 { line-height: 1.2; }
 .meetup h2 { margin-top: 0; }
 .meetup label { display: block; margin: 14px 0 6px; }
 .meetup input { width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #8090aa; border-radius: 8px; background: #0b1220; color: inherit; font: inherit; }
+.meetup select, main > select { min-height: 44px; max-width: 100%; padding: 8px 10px; border: 1px solid #8090aa; border-radius: 8px; background: #0b1220; color: inherit; font: inherit; }
 .meetup-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .secondary-action { background: #26364f; }
 .local-note { color: #bac6d9; font-size: .92rem; }

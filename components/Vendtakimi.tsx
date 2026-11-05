@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 
-type Props = { id: string; nisja: string; destinacioni: string };
+type Props = {
+  id: string;
+  nisja: string;
+  destinacioni: string;
+  /** Optional adapter used only by the local Java 8 behavior simulator. */
+  geolocationOverride?: Pick<Geolocation, "getCurrentPosition"> | null;
+};
 
-export function Vendtakimi({ id, nisja, destinacioni }: Props) {
+export function Vendtakimi({ id, nisja, destinacioni, geolocationOverride }: Props) {
   const [teksti, setTeksti] = useState("");
   const [vendtakimi, setVendtakimi] = useState("");
   const [dukeKerkuar, setDukeKerkuar] = useState(false);
@@ -21,14 +27,17 @@ export function Vendtakimi({ id, nisja, destinacioni }: Props) {
   }
 
   function perdorVendndodhjen() {
-    if (!navigator.geolocation) {
+    const geolocation = geolocationOverride === undefined
+      ? navigator.geolocation
+      : geolocationOverride;
+    if (!geolocation) {
       setMesazhi("Ky shfletues nuk e mbështet vendndodhjen. Shkruaj vendtakimin vetë.");
       return;
     }
 
     setDukeKerkuar(true);
     setMesazhi("Po kërkojmë vendndodhjen…");
-    navigator.geolocation.getCurrentPosition(
+    geolocation.getCurrentPosition(
       (position) => {
         setDukeKerkuar(false);
         const saktesia = Math.round(position.coords.accuracy);
@@ -45,7 +54,7 @@ export function Vendtakimi({ id, nisja, destinacioni }: Props) {
   }
 
   return (
-    <section className="meetup" aria-labelledby={`meetup-title-${id}`}>
+    <section className="meetup" data-testid="vendtakimi" aria-labelledby={`meetup-title-${id}`}>
       <h2 id={`meetup-title-${id}`}>Zgjidh vendtakimin</h2>
       <p>Udhëtimi: {nisja} → {destinacioni}</p>
       <label htmlFor={`meetup-input-${id}`}>Shkruaj vendtakimin</label>
@@ -62,10 +71,11 @@ export function Vendtakimi({ id, nisja, destinacioni }: Props) {
           {dukeKerkuar ? "Po kërkojmë…" : "Përdor vendndodhjen time"}
         </button>
       </div>
-      <p aria-live="polite" role={mesazhi.includes("refuzua") || mesazhi.includes("mbaroi") || mesazhi.includes("nuk") ? "alert" : "status"}>
+      {dukeKerkuar && <p data-testid="vendtakimi-pritje" role="status">Po kërkojmë vendndodhjen…</p>}
+      <p data-testid="vendtakimi-mesazh" aria-live="polite" role={mesazhi.includes("refuzua") || mesazhi.includes("mbaroi") || mesazhi.includes("nuk") ? "alert" : "status"}>
         {mesazhi}
       </p>
-      <p><strong>Vendtakimi i konfirmuar:</strong> {vendtakimi || "Ende nuk është zgjedhur"}</p>
+      <p data-testid="vendtakimi-konfirmuar"><strong>Vendtakimi i konfirmuar:</strong> {vendtakimi || "Ende nuk është zgjedhur"}</p>
       <p className="local-note">Zgjedhja ruhet vetëm në këtë telefon dhe mund të humbasë pas rifreskimit. Shoferi nuk e merr këtë vendtakim.</p>
     </section>
   );
