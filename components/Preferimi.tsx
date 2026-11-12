@@ -10,8 +10,11 @@ export function Preferimi({ udhetimId, kycur }: Props) {
   const [state, setState] = useState<State>(kycur ? "loading" : "idle");
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState(kycur ? "Po lexojmë preferimet…" : "Hyr për të parë dhe ruajtur preferimet.");
+  const [testMode, setTestMode] = useState(false);
+  const [simulateFailure, setSimulateFailure] = useState(true);
 
   useEffect(() => {
+    setTestMode(process.env.NODE_ENV === "development" && new URLSearchParams(window.location.search).get("prova") === "1");
     if (!kycur) return;
     let active = true;
     fetch("/api/preferimet", { cache: "no-store" })
@@ -35,6 +38,10 @@ export function Preferimi({ udhetimId, kycur }: Props) {
     setCount((n) => n + 1);
     setMessage("Po presim konfirmimin e serverit.");
     try {
+      if (testMode) {
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        if (simulateFailure) throw new Error("Nuk u ruajt. Provo përsëri.");
+      }
       const response = await fetch("/api/preferimet", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ udhetimId }),
@@ -52,13 +59,19 @@ export function Preferimi({ udhetimId, kycur }: Props) {
   }
 
   const saved = state === "saved";
+  const buttonLabel = state === "saving" ? "Po ruhet" : saved ? "Udhëtimi është i ruajtur" : state === "error" ? "Provo përsëri" : "Ruaj udhëtimin";
   return <section className="favorite" aria-label="Preferimi i udhëtimit">
     <button className="action" type="button" onClick={save} disabled={state === "loading" || state === "saving" || saved}
-      aria-pressed={saved} aria-label={saved ? "Udhëtimi është i ruajtur" : "Ruaj udhëtimin"}>
+      aria-pressed={saved} aria-label={buttonLabel}>
       {state === "saving" ? "★ Po ruhet…" : saved ? "★ I ruajtur" : state === "error" ? "☆ Provo përsëri" : "☆ Ruaj udhëtimin"}
     </button>
     <p className="favorite-count" aria-live="polite">Të preferuarat: <strong>{count}</strong></p>
     <p className="local-note">Preferim personal · jo rezervim</p>
     <p role={state === "error" ? "alert" : "status"}>{message}</p>
+    {testMode && <label className="favorite-test">
+      <input type="checkbox" checked={simulateFailure} disabled={state === "saving"}
+        onChange={(event) => setSimulateFailure(event.target.checked)} />
+      Simulo refuzimin e ruajtjes (vetëm lokale)
+    </label>}
   </section>;
 }

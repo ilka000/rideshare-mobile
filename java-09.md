@@ -18,10 +18,10 @@ API-ja kontrollon sesionin në server. `schema-java09.sql` krijon tabelën me ç
 Migrimi u ekzekutua në Neon-in e konfiguruar nga `.env.local` dhe u verifikua se tabela `preferimet` ekziston. `npm run build` kaloi. Në Safari hyra në aplikacion me GitHub, ruajta udhëtimin 2, pashë gjendjen optimiste dhe konfirmimin nga serveri, pastaj rifreskova faqen. Ylli mbeti i mbushur dhe numri ishte 1. Në Neon përsërita ruajtjen për të njëjtin çift përdorues–udhëtim; kontrolli konfirmoi se mbeti vetëm një rresht.
 
 1. **Sukses dhe rifreskim — kaloi:** ruajta udhëtimin 2 në Safari, prita konfirmimin, rifreskova faqen dhe pashë yllin e mbushur, numrin 1 dhe mesazhin `Preferimet u lexuan nga serveri.`
-2. **Refuzim — ende për t'u provuar:** nis nga një udhëtim i paruajtur. Ndërprit përkohësisht POST-in para shkrimit (p.sh. DevTools → Network → Offline), kliko ruajtjen dhe prit gabimin. Kontrollo rikthimin e yllit dhe numrit, pastaj rikthe rrjetin dhe provo sërish.
+2. **Refuzim:** në modalitetin lokal të provës, shto `?prova=1` te URL-ja e detajeve në `npm run dev`. Lëre të zgjedhur kutinë `Simulo refuzimin e ruajtjes`, ruaj një udhëtim të paruajtur dhe prit gabimin; kontrollo rikthimin e yllit dhe numrit. Hiqe shenjën dhe kliko `Provo përsëri` për ruajtje reale.
 3. **Përsëritje — kufizimi i databazës kaloi:** dërgova përsëri të njëjtin çift në Neon. `ON CONFLICT` nuk shtoi rresht dhe numri mbeti një. Klikimet e shpejta në ndërfaqe nuk u provuan veçmas.
 
 ## Kufizime
 
-Ruajtja kërkon sesion GitHub. Rasti i refuzimit dhe klikimet e shpejta presin provë manuale. Refuzimi i kontrolluar në DevTools simulon dështimin e transportit; nuk simulon çdo lloj gabimi të serverit.
+Ruajtja kërkon sesion GitHub. Simulimi i refuzimit është vetëm në `npm run dev`, vonon 800 ms dhe ndodh para kërkesës në server; nuk teston çdo lloj gabimi të serverit. Klikimet e shpejta nuk u provuan veçmas.
 

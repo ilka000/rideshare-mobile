@@ -18,4 +18,5 @@ h1 { line-height: 1.2; }
 .local-note { color: #bac6d9; font-size: .92rem; }
 .favorite { margin: 20px 0; padding: 16px; border: 1px solid #53627b; border-radius: 12px; background: #111b2d; }
 .favorite-count { font-size: 1.1rem; }
+.favorite-test { display: flex; align-items: center; gap: 8px; margin-top: 12px; color: #bac6d9; font-size: .92rem; }
 @media (max-width: 480px) { main { padding: 18px 16px; } .trip-card { padding: 16px; } }
