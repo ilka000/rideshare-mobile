@@ -26,6 +26,8 @@ Vercel creates deployments from GitHub pushes once the repository is imported an
 - `/udhetimi/2/kerkesa` — pending request simulation
 - `/udhetimi/99` — trip not found
 - `/java-08-test` — Java 8 local meeting point and geolocation behavior checks
+- `schema-java09.sql` — Java 9 migration for saved trips; run it in the Neon branch used by `DATABASE_URL`.
+- `java-09.md` — Java 9 implementation notes and manual verification checklist.
 
 ## Java 8 submission files
 

@@ -16,4 +16,6 @@ h1 { line-height: 1.2; }
 .meetup-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .secondary-action { background: #26364f; }
 .local-note { color: #bac6d9; font-size: .92rem; }
+.favorite { margin: 20px 0; padding: 16px; border: 1px solid #53627b; border-radius: 12px; background: #111b2d; }
+.favorite-count { font-size: 1.1rem; }
 @media (max-width: 480px) { main { padding: 18px 16px; } .trip-card { padding: 16px; } }
