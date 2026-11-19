@@ -34,6 +34,6 @@ export default async function Panel({ searchParams }: { searchParams: Promise<{ 
       <p>Formulari i laboratorit provon ID 2. Serveri verifikon pronarin edhe nëse ID ndryshohet.</p>
     </form> : p && <p>Si udhëtar mund të shohësh udhëtimet; nuk mund të ndryshosh orën e shoferit.</p>}
     <p><Link href="/">Kthehu te udhëtimet</Link></p>
-    <p>Kërkesa për vend mbetet simulim këtë javë.</p>
+    <p>Kërkesat për vende ruhen në Neon dhe rifreskohen automatikisht.</p>
   </main>;
 }

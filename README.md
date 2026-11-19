@@ -1,6 +1,6 @@
 # RideShare · Java 8
 
-A Next.js App Router demo of fictional rides to AAB, backed by Neon PostgreSQL. It has a trip list, trip details, a local meeting point selector, GitHub sign-in, and a driver panel. Seat requests remain a simulation.
+A Next.js App Router demo of fictional rides to AAB, backed by Neon PostgreSQL. It has a trip list, trip details, a local meeting point selector, GitHub sign-in, a driver panel, and persisted seat requests with five-second refresh.
 
 ## Run locally
 
@@ -28,6 +28,8 @@ Vercel creates deployments from GitHub pushes once the repository is imported an
 - `/java-08-test` — Java 8 local meeting point and geolocation behavior checks
 - `schema-java09.sql` — Java 9 migration for saved trips; run it in the Neon branch used by `DATABASE_URL`.
 - `java-09.md` — Java 9 implementation notes and manual verification checklist.
+- `schema-java10.sql` — Java 10 migration for persisted seat requests; run it in the Neon branch used by `DATABASE_URL`.
+- `java-10.md` — Java 10 implementation notes and honest status of the three manual checks.
 
 ## Java 8 submission files
 

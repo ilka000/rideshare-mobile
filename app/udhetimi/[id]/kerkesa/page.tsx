@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { gjejUdhetimin } from "@/lib/udhetimet";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { KerkesaLive } from "@/components/KerkesaLive";
 
 export const dynamic = "force-dynamic";
 
@@ -21,15 +24,13 @@ export default async function Kerkesa({
     );
   }
   if (!udhetim) notFound();
+  const session = await getServerSession(authOptions);
 
   return (
     <main>
       <Link href={`/udhetimi/${id}`}>← Kthehu te detajet</Link>
-      {udhetim.vende > 0 ? <>
-        <h1>Simulim: Në pritje</h1>
-        <p>Kërkesa për {udhetim.nisja} nuk është dërguar te shoferi.</p>
-        <p>Ruajtjen dhe konfirmimin real do t’i shtojmë më vonë.</p>
-      </> : <h1>Nuk ka vende të lira.</h1>}
+      <h1>Kërkesë për vend · {udhetim.nisja} → {udhetim.destinacioni}</h1>
+      <KerkesaLive udhetimId={id} kycur={Boolean(session?.user?.id)} initialVende={udhetim.vende} />
     </main>
   );
 }

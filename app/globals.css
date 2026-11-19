@@ -19,4 +19,7 @@ h1 { line-height: 1.2; }
 .favorite { margin: 20px 0; padding: 16px; border: 1px solid #53627b; border-radius: 12px; background: #111b2d; }
 .favorite-count { font-size: 1.1rem; }
 .favorite-test { display: flex; align-items: center; gap: 8px; margin-top: 12px; color: #bac6d9; font-size: .92rem; }
+.live-requests { margin: 20px 0; padding: 16px; border: 1px solid #53627b; border-radius: 12px; background: #111b2d; }
+.live-requests h2 { margin-top: 0; }
+.request-row { padding: 8px 0; border-top: 1px solid #53627b; }
 @media (max-width: 480px) { main { padding: 18px 16px; } .trip-card { padding: 16px; } }

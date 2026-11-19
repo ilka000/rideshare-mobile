@@ -5,6 +5,7 @@ import { Vendtakimi } from "@/components/Vendtakimi";
 import { Preferimi } from "@/components/Preferimi";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { KerkesaLive } from "@/components/KerkesaLive";
 
 export const dynamic = "force-dynamic";
 
@@ -37,9 +38,7 @@ export default async function Detajet({
       <p>{udhetim.vende} {etiketaVendeve}</p>
       <Preferimi udhetimId={id} kycur={Boolean(session?.user?.id)} />
       <Vendtakimi id={id} nisja={udhetim.nisja} destinacioni={udhetim.destinacioni} />
-      {udhetim.vende > 0
-        ? <Link className="action" href={`/udhetimi/${id}/kerkesa`}>Kërko vend</Link>
-        : <button className="action" disabled>Nuk ka vende të lira</button>}
+      <KerkesaLive udhetimId={id} kycur={Boolean(session?.user?.id)} initialVende={udhetim.vende} />
     </main>
   );
 }
